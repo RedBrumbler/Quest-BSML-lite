@@ -10,6 +10,7 @@
 #include "bsml/shared/BSML/Components/Settings/SliderSetting.hpp"
 #include "bsml/shared/BSML/Components/Settings/ColorSetting.hpp"
 #include "bsml/shared/BSML/Components/Settings/DropdownListSetting.hpp"
+#include "bsml/shared/BSML/Components/Settings/ToggleSetting.hpp"
 #include "bsml/shared/BSML/Components/ModalColorPicker.hpp"
 
 namespace BSML::Lite {
@@ -228,4 +229,42 @@ namespace BSML::Lite {
     /// @param onChange the callback to call when the color changes at all
     /// @return the created color picker modal object
     BSML::ModalColorPicker* CreateColorPickerModal(const TransformWrapper& parent, StringW name, UnityEngine::Color defaultColor, std::function<void(UnityEngine::Color)> onDone = nullptr, std::function<void()> onCancel = nullptr, std::function<void(UnityEngine::Color)> onChange = nullptr);
+
+    /// @brief creates a toggle to turn things off / on
+    /// @param parent what to parent it to
+    /// @param text the label to give to the toggle
+    /// @param currentValue the current value of the toggle
+    /// @param anchoredPosition the position of the toggle
+    /// @param onToggle what to do when the toggle is clicked
+    /// @return the created toggle
+    BSML::ToggleSetting* CreateToggle(const TransformWrapper& parent, StringW text, bool currentValue, UnityEngine::Vector2 anchoredPosition, std::function<void(bool)> onToggle = nullptr);
+
+    /// @brief creates a toggle to turn things off / on
+    /// @param parent what to parent it to
+    /// @param text the label to give to the toggle
+    /// @param currentValue the current value of the toggle
+    /// @param onToggle what to do when the toggle is clicked
+    /// @return the created toggle
+    inline BSML::ToggleSetting* CreateToggle(const TransformWrapper& parent, StringW text, bool currentValue, std::function<void(bool)> onToggle = nullptr) {
+        return CreateToggle(parent, text, currentValue, {}, onToggle);
+    }
+
+    /// @brief creates a toggle to turn things off / on
+    /// @param parent what to parent it to
+    /// @param text the label to give to the toggle
+    /// @param anchoredPosition the position of the toggle
+    /// @param onToggle what to do when the toggle is clicked
+    /// @return the created toggle
+    inline BSML::ToggleSetting* CreateToggle(const TransformWrapper& parent, StringW text, UnityEngine::Vector2 anchoredPosition, std::function<void(bool)> onToggle = nullptr) {
+        return CreateToggle(parent, text, false, anchoredPosition, onToggle);
+    }
+
+    /// @brief creates a toggle to turn things off / on
+    /// @param parent what to parent it to
+    /// @param text the label to give to the toggle
+    /// @param onToggle what to do when the toggle is clicked
+    /// @return the created toggle
+    inline BSML::ToggleSetting* CreateToggle(const TransformWrapper& parent, StringW text, std::function<void(bool)> onToggle = nullptr) {
+        return CreateToggle(parent, text, false, {}, onToggle);
+    }
 }

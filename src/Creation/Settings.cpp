@@ -15,6 +15,7 @@
 #define private public
 #include "bsml/shared/BSML/Tags/TextFieldTag.hpp"
 #include "bsml/shared/BSML/Tags/ModifierTag.hpp"
+#include "bsml/shared/BSML/Tags/Settings/ToggleSettingTag.hpp"
 #include "bsml/shared/BSML/Tags/Settings/IncrementSettingTag.hpp"
 #include "bsml/shared/BSML/Tags/Settings/SliderSettingTag.hpp"
 #include "bsml/shared/BSML/Tags/Settings/DropdownListSettingTag.hpp"
@@ -171,4 +172,20 @@ namespace BSML::Lite {
         return colorPicker;
     }
 
+    BSML::ToggleSetting* CreateToggle(const TransformWrapper& parent, StringW label, bool currentValue, UnityEngine::Vector2 anchoredPosition, std::function<void(bool)> onToggle) {
+        auto go = BSML::ToggleSettingTag{}.CreateObject(parent);
+        auto toggle = go->GetComponent<BSML::ToggleSetting*>();
+        auto externalComponents = go->GetComponent<BSML::ExternalComponents*>();
+        auto text = externalComponents->Get<TMPro::TextMeshProUGUI*>();
+        text->set_text(label);
+
+        auto rect = reinterpret_cast<UnityEngine::RectTransform*>(go->get_transform());
+        if (onToggle) {
+            toggle->toggle->onValueChanged = UnityEngine::UI::Toggle::ToggleEvent::New_ctor();
+            toggle->toggle->onValueChanged->AddListener(
+                custom_types::MakeDelegate<UnityEngine::Events::UnityAction_1<bool>*>(onToggle)
+            );
+        }
+        return toggle;
+    }
 }
