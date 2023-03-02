@@ -33,7 +33,11 @@ namespace BSML::Lite {
     }
 
     UnityEngine::GameObject* CreateScrollableSettingsContainer(const TransformWrapper& parent) {
-        return BSML::SettingsContainerTag{}.CreateObject(parent);
+        auto go = BSML::SettingsContainerTag{}.CreateObject(parent);
+        auto externalComponents = go->GetComponent<BSML::ExternalComponents*>();
+        auto scrollTransform = externalComponents->Get<UnityEngine::RectTransform*>();
+        scrollTransform->set_sizeDelta(UnityEngine::Vector2(0.0f, 0.0f));
+        return go;
     }
 
     UnityEngine::GameObject* CreateScrollView(const TransformWrapper& parent) {
