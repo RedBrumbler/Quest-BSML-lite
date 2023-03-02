@@ -2,6 +2,7 @@
 
 #include "bsml/shared/BSML.hpp"
 
+#include "Creation/Settings.hpp"
 #include "Creation/Buttons.hpp"
 #include "Creation/Image.hpp"
 #include "Creation/Layout.hpp"
