@@ -19,6 +19,9 @@ namespace BSML::Lite {
         auto rect = go->GetComponent<UnityEngine::RectTransform*>();
         rect->set_anchoredPosition(anchoredPosition);
         rect->set_sizeDelta(sizeDelta);
+
+        go->AddComponent<UnityEngine::UI::LayoutElement*>();
+
         return t;
     }
 
@@ -34,6 +37,9 @@ namespace BSML::Lite {
         rect->set_sizeDelta(sizeDelta);
 
         if (onClick) t->onClick += {onClick};
+
+        go->AddComponent<UnityEngine::UI::LayoutElement*>();
+
         return t;
     }
 
