@@ -5,7 +5,7 @@
 #include "bsml/shared/BSML/Tags/ClickableTextTag.hpp"
 #undef protected
 
-
+#include "UnityEngine/UI/LayoutElement.hpp"
 #include "UnityEngine/RectTransform.hpp"
 
 namespace BSML::Lite {
