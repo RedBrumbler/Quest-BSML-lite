@@ -82,6 +82,8 @@ namespace BSML::Lite {
 
         incrementSetting->digits = decimals;
         incrementSetting->isInt = std::abs(increment - 1.0f) < 0.00001f;
+        incrementSetting->increments = increment;
+
         if (hasMin) incrementSetting->minValue = minValue;
         if (hasMax) incrementSetting->maxValue = maxValue;
         auto text = externalComponents->Get<TMPro::TextMeshProUGUI*>();
