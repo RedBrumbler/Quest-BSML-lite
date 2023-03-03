@@ -45,6 +45,8 @@ namespace BSML::Lite {
                 );
         }
 
+        textField->set_text(currentValue);
+
         return textField;
     }
 
@@ -67,6 +69,9 @@ namespace BSML::Lite {
                 custom_types::MakeDelegate<UnityEngine::Events::UnityAction_1<bool>*>(onClick)
             );
         }
+
+        toggle->set_isOn(currentValue);
+
         return toggle;
     }
 
@@ -88,6 +93,9 @@ namespace BSML::Lite {
         incrementSetting->set_Value(currentValue);
 
         incrementSetting->onChange = onValueChange;
+
+        incrementSetting->set_Value(currentValue);
+
         return incrementSetting;
     }
 
@@ -111,6 +119,9 @@ namespace BSML::Lite {
         sliderSetting->set_Value(currentValue);
 
         sliderSetting->onChange = onValueChange;
+
+        sliderSetting->set_Value(currentValue);
+
         return sliderSetting;
     }
 
@@ -128,15 +139,20 @@ namespace BSML::Lite {
 
         // is this valid, this early?
         auto itr = std::find_if(values.begin(), values.end(), [currentValue](const auto& x){ return x == currentValue; });
+        int idx = 0;
         if (itr != values.end()) {
-            dropdownSetting->dropdown->SelectCellWithIdx(itr - values.begin());
-            dropdownSetting->UpdateState();
+            auto idx = itr - values.begin();
         }
+
+        dropdownSetting->index = idx;
+        dropdownSetting->dropdown->SelectCellWithIdx(idx);
+        dropdownSetting->UpdateState();
 
         auto text = externalComponents->Get<TMPro::TextMeshProUGUI*>();
         text->set_text(label);
 
         dropdownSetting->onChange = onValueChange;
+
         return dropdownSetting;
     }
 
@@ -186,6 +202,9 @@ namespace BSML::Lite {
                 custom_types::MakeDelegate<UnityEngine::Events::UnityAction_1<bool>*>(onToggle)
             );
         }
+
+        toggle->set_Value(currentValue);
+
         return toggle;
     }
 }
