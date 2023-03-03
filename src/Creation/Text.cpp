@@ -5,7 +5,7 @@
 #include "bsml/shared/BSML/Tags/ClickableTextTag.hpp"
 #undef protected
 
-
+#include "UnityEngine/UI/LayoutElement.hpp"
 #include "UnityEngine/RectTransform.hpp"
 
 namespace BSML::Lite {
@@ -19,6 +19,9 @@ namespace BSML::Lite {
         auto rect = go->GetComponent<UnityEngine::RectTransform*>();
         rect->set_anchoredPosition(anchoredPosition);
         rect->set_sizeDelta(sizeDelta);
+
+        go->AddComponent<UnityEngine::UI::LayoutElement*>();
+
         return t;
     }
 
@@ -34,6 +37,9 @@ namespace BSML::Lite {
         rect->set_sizeDelta(sizeDelta);
 
         if (onClick) t->onClick += {onClick};
+
+        go->AddComponent<UnityEngine::UI::LayoutElement*>();
+
         return t;
     }
 
